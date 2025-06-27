@@ -1,10 +1,12 @@
-# Taxi Fare Prediction
+# 🚖 Taxi Fare Prediction
 
-This project predicts the **fare amount** for Taxi rides using historical trip data. It includes full data preprocessing, feature engineering, model training, and evaluation.
+This project predicts the **fare amount** for NYC taxi rides using historical trip data. It includes full data preprocessing, feature engineering, model training, and deployment via Streamlit.
+
+🔗 **[Try the Live App](https://taxi-fare-prediction-kgyrhmvegjcjanwgfzydtb.streamlit.app/)**
 
 ---
 
-##  Objective
+## 🎯 Objective
 
 To build a regression model that can accurately estimate taxi fares based on:
 
@@ -16,7 +18,7 @@ To build a regression model that can accurately estimate taxi fares based on:
 
 ---
 
-##  Technologies Used
+## 🛠 Technologies Used
 
 - Python
 - Pandas, NumPy
@@ -26,50 +28,48 @@ To build a regression model that can accurately estimate taxi fares based on:
 
 ---
 
-##  Dataset Features
+## 📊 Dataset Features
 
 | Column               | Description                                |
 |----------------------|--------------------------------------------|
 | `trip_distance`      | Distance of the trip in miles              |
 | `passenger_count`    | Number of passengers                       |
 | `hour`, `day`, `date`| Extracted from pickup datetime             |
-| `PULocationID`, `DOLocationID` | Pickup and dropoff zones        |
-| `PUborough`, `DOborough` | Mapped boroughs using location zones   |
+| `PUborough`, `DOborough` | Pickup and dropoff boroughs            |
 | `tolls_amount`, `Airport_fee`, `cbd_congestion_fee` | Surcharges |
-| `total_amount`       |  Target variable                         |
+| `total_amount`       | Target variable (fare)                     |
 
 ---
 
-##  Model Used
+## 🔍 Model
 
-A `LinearRegression` model wrapped in a Scikit-learn `Pipeline` with:
+A `LinearRegression` model wrapped in a Scikit-learn `Pipeline`:
 
-- **Numeric preprocessing**: imputation + scaling  
-- **Categorical preprocessing**: imputation + one-hot encoding  
-- **Feature selection**: only relevant columns used after cleaning
-
----
-
-##  Model Evaluation (on unseen February data)
-
-| Metric     | Logistic Regression |
-|------------|------------|
-| **RMSE**   | `4.91`     |
-| **MAE**    | `2.91`     |
-| **R² Score** | `0.9425` |
-
- The model explains ~94% of the variance in fare and generalizes well to new data.
+- **Numerical features**: imputation + scaling  
+- **Categorical features**: imputation + one-hot encoding  
 
 ---
 
-##  Deployment 
+## 📈 Model Evaluation (on unseen Feb data)
 
-The model is deployed using **Streamlit** with a simple web UI that allows users to:
+| Metric        | Linear Regression |
+|---------------|-------------------|
+| RMSE          | `4.91`            |
+| MAE           | `2.91`            |
+| R² Score      | `0.9425`          |
 
-- Input trip details (hour, distance, boroughs, surcharges)
-- Get an instant fare estimate
+✅ The model explains ~94% of the fare variance.
 
-Run locally:
+---
+
+## 🌐 Deployment
+
+Deployed with **Streamlit**. Users can:
+
+- Input trip details (time, passengers, boroughs, etc.)
+- Get instant fare predictions based on real model logic
+
+To run locally:
 
 ```bash
 streamlit run app.py
