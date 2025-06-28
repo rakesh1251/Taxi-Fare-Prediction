@@ -91,13 +91,19 @@ input_df = pd.DataFrame(input_dict)
 st.markdown("---")
 if st.button("🔍 Predict Fare"):
     try:
-        model = joblib.load("fare_predictor.pkl")
-        prediction = model.predict(input_df)[0]
-        
-        if prediction < 0 or prediction > 500:
-            st.warning("⚠️ Predicted fare seems unusual. Please review the inputs.")
+        # Send POST request to FastAPI
+        API_URL = "https://taxi-fare-predictor.onrender.com/predict"
+        response = requests.post(API_URL, json=input_df.iloc[0].to_dict())
+
+        if response.status_code == 200:
+            prediction = response.json()["predicted_fare"]
+            if prediction < 0 or prediction > 500:
+                st.warning("⚠️ Predicted fare seems unusual. Please review the inputs.")
+            else:
+                st.success(f"💰 Estimated Fare: ${round(prediction, 2)}")
         else:
-            st.success(f"💰 Estimated Fare: ${round(prediction, 2)}")
+            st.error(f"❌ API Error: {response.status_code} - {response.text}")
 
     except Exception as e:
-        st.error(f"❌ Error during prediction: {e}")
+        st.error(f"❌ Request failed: {e}")
+
