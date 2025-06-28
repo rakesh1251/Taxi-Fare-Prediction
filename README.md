@@ -1,8 +1,9 @@
 # 🚖 Taxi Fare Prediction
 
-This project predicts the **fare amount** for NYC taxi rides using historical trip data. It includes full data preprocessing, feature engineering, model training, and deployment via Streamlit.
+This project predicts the **fare amount** for NYC taxi rides using historical trip data. It includes full data preprocessing, feature engineering, model training, and deployment via both **Streamlit** (frontend) and **FastAPI** (backend).
 
-🔗 **[Try the Live App](https://taxi-fare-prediction-kgyrhmvegjcjanwgfzydtb.streamlit.app/)**
+🔗 **Live App**: [https://taxi-fare-predictor.streamlit.app](https://taxi-fare-predictor.streamlit.app)  
+🔧 **API Endpoint**: [https://taxi-fare-predictor.onrender.com/docs](https://taxi-fare-predictor.onrender.com/docs)
 
 ---
 
@@ -10,21 +11,23 @@ This project predicts the **fare amount** for NYC taxi rides using historical tr
 
 To build a regression model that can accurately estimate taxi fares based on:
 
-- Trip distance & duration
-- Pickup hour and day
-- Borough-level pickup/dropoff zones
-- Surcharges (tolls, congestion fees, etc.)
-- Vendor and payment details
+- Trip distance & duration  
+- Pickup hour and day  
+- Borough-level pickup/dropoff zones  
+- Surcharges (tolls, congestion fees, etc.)  
+- Vendor and payment details  
 
 ---
 
 ## 🛠 Technologies Used
 
-- Python
-- Pandas, NumPy
-- Scikit-learn (Model)
-- Matplotlib & Seaborn (for EDA)
-- Streamlit (for deployment)
+- Python  
+- Pandas, NumPy  
+- Scikit-learn (Model & Pipeline)  
+- Matplotlib, Seaborn (EDA)  
+- Streamlit (frontend/UI)  
+- FastAPI (model backend)  
+- Render (backend deployment)  
 
 ---
 
@@ -50,7 +53,7 @@ A `LinearRegression` model wrapped in a Scikit-learn `Pipeline`:
 
 ---
 
-## 📈 Model Evaluation (on unseen Feb data)
+## 📈 Model Evaluation (on unseen February data)
 
 | Metric        | Linear Regression |
 |---------------|-------------------|
@@ -62,14 +65,37 @@ A `LinearRegression` model wrapped in a Scikit-learn `Pipeline`:
 
 ---
 
-## 🌐 Deployment
+## 🔁 Full-Stack Architecture
 
-Deployed with **Streamlit**. Users can:
+This project follows a **modular, real-world architecture**:
 
-- Input trip details (time, passengers, boroughs, etc.)
-- Get instant fare predictions based on real model logic
 
-To run locally:
+- 🖥️ **Frontend**: Streamlit (collects input & displays fare)  
+- ⚙️ **Backend**: FastAPI (runs prediction logic via `/predict`)  
+- ☁️ **Deployment**: Streamlit Cloud (UI) + Render (API)
+
+---
+
+## 💻 How to Run Locally
+
+1. Clone the repo  
+2. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+3. Run Streamlit frontend
 
 ```bash
 streamlit run app.py
+```
+4. Run FastAPI backend
+
+```bash
+uvicorn api:app --reload
+```
+5. Render start command (for deployment)
+
+```yaml
+startCommand: uvicorn api:app --host 0.0.0.0 --port 10000
+```
