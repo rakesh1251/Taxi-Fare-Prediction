@@ -32,8 +32,8 @@ with col1:
 
 with col2:
     PUborough = st.selectbox("📍 Pickup Borough", ['Manhattan', 'Brooklyn', 'Queens', 'Bronx', 'Staten Island', 'EWR'])
-    DOborough = st.selectbox("📍 Dropoff Borough", ['Manhattan', 'Brooklyn', 'Queens', 'Bronx', 'Staten Island', 'EWR'])
-    trip_distance = st.number_input("🌍 Trip Distance (miles)", min_value=0.1, max_value=100.0, value=1.5)
+    DOborough = st.selectbox("📍 Dropoff Borough", ['Brooklyn','Manhattan', 'Queens', 'Bronx', 'Staten Island', 'EWR'])
+    trip_distance = st.number_input("🌍 Trip Distance (miles)", min_value=0.1, max_value=100.0, value=2.5)
     pickup_hour = st.slider("🕒 Pickup Hour", 0, 23, 12)
 
 mean_distance = trip_distance
