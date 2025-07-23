@@ -2,7 +2,7 @@ import requests
 import streamlit as st
 import pandas as pd
 import joblib
-from datetime import datetime
+from datetime import datetime,date
 
 # Page settings
 st.set_page_config(page_title="Taxi Fare Predictor", page_icon="🚖", layout="centered")
@@ -40,6 +40,7 @@ mean_distance = trip_distance
 
 # Date-based features
 date = st.date_input("Ride Date", value=datetime.today())
+
 date = datetime.today()
 day = date.strftime("%A")
 day_number = date.day
